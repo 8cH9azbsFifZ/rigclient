@@ -12,3 +12,8 @@ ENV RIGSERVER_CAT_PORT 3002
 ENV RIGMODEL 133
 
 ADD startup.sh /bin
+
+HEALTHCHECK --interval=10s --timeout=3s CMD rigctl -m $RIGMODEL -r /dev/YPort f ||exit 1
+
+ENTRYPOINT ["startup.sh"]
+CMD ["bash"]
